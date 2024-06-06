@@ -13,7 +13,9 @@ document.getElementById('cliente-form').addEventListener('submit', function(e) {
     })
     .then(response => response.json())
     .then(data => {
+        alert("Sucesso: "+ data.nome)
         console.log('Success:', data);
+        location.reload()
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -51,6 +53,7 @@ document.getElementById('update-btn').addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
+        alert("Sucesso: "+ data.nome)
         console.log('Success:', data);
     })
     .catch((error) => {
@@ -61,14 +64,19 @@ document.getElementById('update-btn').addEventListener('click', function() {
 //get funcionando
 function updateClienteInfo(cliente) {
     const clienteInfo = document.getElementById('cliente-info');
-    clienteInfo.innerHTML = `
-        <h2>Cliente Info</h2>
-        <p>ID: ${cliente.id}</p>
-        <p>Nome: ${cliente.nome}</p>
-        <p>Email: ${cliente.email}</p>
-        <p>Telefone: ${cliente.telefone}</p>
-    `;
+    if (cliente) {
+        clienteInfo.innerHTML = `
+            <h2>Cliente Info</h2>
+            <p>ID: ${cliente.id}</p>
+            <p>Nome: ${cliente.nome}</p>
+            <p>Email: ${cliente.email}</p>
+            <p>Telefone: ${cliente.telefone}</p>
+        `;
+    } else {
+        clienteInfo.innerHTML = '<h2>Cliente não encontrado</h2>';
     }
+}
+
 document.getElementById('get-btn').addEventListener('click', function() {
     let id = document.getElementById('id').value;
     fetch(`http://localhost:8080/clientes/${id}`, {
