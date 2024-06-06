@@ -55,6 +55,7 @@ document.getElementById('update-btn').addEventListener('click', function() {
     .then(data => {
         alert("Sucesso: "+ data.nome)
         console.log('Success:', data);
+        location.reload()
     })
     .catch((error) => {
         console.error('Error:', error);
